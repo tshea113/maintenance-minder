@@ -77,10 +77,3 @@ if __name__ == "__main__":
     
     if userInput[0] == '1': view_services()
     elif userInput[0] == '2': break
-
-  # with Session(engine) as session:
-  #   with session.begin():
-
-  #     currCar = get_cars(session)[0]
-
-  #     add_service(session, currCar, 'Tires', 'Nitto', date(1901, 2, 1), 70000)
