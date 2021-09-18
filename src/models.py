@@ -18,5 +18,6 @@ class Service(Base):
     car_id = Column(Integer, ForeignKey("car.car_id"))
     name = Column(String)
     description = Column(String)
+    category = Column(String)
     date = Column(Date)
     mileage = Column(Integer)

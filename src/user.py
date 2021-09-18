@@ -1,5 +1,7 @@
 import db
 
+import datetime
+
 from sqlalchemy.orm import Session
 
 from rich.console import Console
@@ -48,3 +50,36 @@ def insert_car(engine):
       db.add_car(session, newYear=data[0], newMake=data[1], newModel=data[2])
 
   print("\nCar added!") # TODO: This probably should be an actual verification
+
+def insert_service(engine):
+  with Session(engine) as session:
+    with session.begin():
+      cars = db.get_cars(session)
+
+      print("\nWhich car would you like to add a service?")
+      for index, car in enumerate(cars):
+        print(str(index+1) + '. ' + str(car.year) + ' ' + car.make + ' ' + car.model)
+      print()
+
+      userInput = input() #TODO: Probably should make this input more robust. Seems like it would break easy
+      car = cars[int(userInput)-1]
+
+      print("\nEnter the name of the service")
+      name = input()
+      print()
+
+      print("\nEnter the description of the service")
+      description = input()
+      print()
+
+      print("\nEnter the date of the service in the format MM/DD/YY")
+      date = input()
+      print()
+
+      print("\nEnter the mileage of the service")
+      mileage = input()
+      print()
+
+      db.add_service(session, newCar=car, newName=name, newDescription=description, newDate=datetime.datetime.strptime(date, '%m/%d/%y').date(), newMileage=int(mileage))
+
+  print("\nService added!") # TODO: This probably should be an actual verification  
